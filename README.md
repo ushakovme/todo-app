@@ -1,42 +1,54 @@
-# Slim Framework 4 Skeleton Application
+# Задание
+Разработать сервис “Todo list”, который позволяет вести список задач.
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
+Должны поддерживаться следующие операции:
+- Добавить новую задачу;
+- пометить задачу как выполненную;
+- получить список невыполненных задач;
+- удалить задачу.
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
+Задача представляет из себя обычный текст, максимальной длиной 1000 символов.
+Попытка задать текст большего размера должна приводить к выбрасыванию ошибки.
+Для взаимодействия с сервисом использовать REST API. Представление данных в
+формате JSON.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+Список задач всегда один общий, авторизация не требуется.
+API должно адекватно реагировать на некорректные входные данные и возвращать
+соответствующий код ответа. Например, передача некорректного идентификатора задачи
+в вызове метода, приводит к коду ответа 404
 
-## Install the Application
+## Дополнительные задания:
+- Метод API, позволяющий получить список архивных задач (которые были
+помечены выполненными);
+- набор API тестов, позволяющих проверить работу приложения в автоматическом
+режиме. Реализовать можно с помощью Postman (https://www.postman.com/use-
+cases/api-testing-automation/);
+- Dockerfile, который содержит все необходимые настройки и зависимости для
+быстрого разворачивания окружения.
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+## Требования по используемым технологиям
+- Язык программирования: PHP 7.x или Go
+- СУБД: MySQL или postgresql
+- Исходный код разместить в репозитории на GitHub
+- Использование фреймворков и библиотек по желанию.
+
+## Решение
+
+Запуск в dev режиме: 
 
 ```bash
-composer create-project slim/slim-skeleton [my-app-name]
-```
-
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
-
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
-
-To run the application in development, you can run these commands 
-
-```bash
-cd [my-app-name]
 composer start
 ```
 
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
+Запуск через Docker:
 ```bash
-cd [my-app-name]
 docker-compose up -d
 ```
-After that, open `http://localhost:8080` in your browser.
 
-Run this command in the application directory to run the test suite
+Ресурс будет доступен по адресу: `http://localhost:8080`.
 
+
+Запуск тестов
 ```bash
 composer test
 ```
-
-That's it! Now go build something cool.
