@@ -1,0 +1,45 @@
+<?php
+declare(strict_types=1);
+
+namespace Tests\Domain\Task;
+
+use App\Domain\Task\Task;
+use App\Domain\Task\TaskId;
+use Tests\TestCase;
+
+class TaskTest extends TestCase
+{
+    public function taskProvider()
+    {
+        return [
+            [TaskId::fromInt(1), 'content1'],
+            [TaskId::fromInt(2), 'content2'],
+        ];
+    }
+
+    /**
+     * @dataProvider taskProvider
+     */
+    public function testGetters(TaskId $id, string $content)
+    {
+        $task = new Task($id, $content);
+
+        $this->assertEquals($id, $task->getId());
+        $this->assertEquals($content, $task->getContent());
+    }
+
+    /**
+     * @dataProvider taskProvider
+     */
+    public function testJsonSerialize(TaskId $id, string $content)
+    {
+        $task = new Task($id, $content);
+
+        $expectedPayload = json_encode([
+            'id' => $id->toInt(),
+            'content' => $content,
+        ]);
+
+        $this->assertEquals($expectedPayload, json_encode($task));
+    }
+}
