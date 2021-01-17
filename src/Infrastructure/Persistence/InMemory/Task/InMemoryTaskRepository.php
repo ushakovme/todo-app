@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Task;
+namespace App\Infrastructure\Persistence\ImMemory\Task;
 
 use App\Domain\Task\Exception\TaskNotFoundException;
 use App\Domain\Task\Task;
