@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\CycleORM;
 
 
+use App\Domain\Task\Exception\TaskNotFoundException;
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskId;
 use App\Domain\Task\TaskRepositoryInterface;
@@ -24,7 +25,12 @@ class SQLTaskRepository implements TaskRepositoryInterface
 
     public function findById(TaskId $id): Task
     {
-        return $this->select()->wherePK($id->toInt())->fetchOne();
+        $task = $this->select()->wherePK($id->toInt())->fetchOne();
+        if (!$task) {
+            throw new TaskNotFoundException();
+        }
+
+        return $task;
     }
 
     public function findOne(array $scope = [])
