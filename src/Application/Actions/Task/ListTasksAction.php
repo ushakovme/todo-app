@@ -8,10 +8,15 @@ class ListTasksAction extends AbstractTaskAction
 {
     protected function action(): ResponseInterface
     {
-        $showCompleted = (bool)($this->request->getQueryParams()['completed'] ?? false);
+        $queryParams = $this->request->getQueryParams();
+        if (array_key_exists('completed', $queryParams)) {
+            $showCompleted = (bool)$queryParams['completed'];
 
-        if ($showCompleted) {
-            $tasks = $this->taskRepository->findCompleted();
+            if ($showCompleted) {
+                $tasks = $this->taskRepository->findCompleted();
+            } else {
+                $tasks = $this->taskRepository->findNotCompleted();
+            }
         } else {
             $tasks = $this->taskRepository->findAll();
         }

@@ -55,4 +55,11 @@ class InMemoryTaskRepository implements TaskRepositoryInterface
         });
     }
 
+    public function findNotCompleted(): iterable
+    {
+        return array_filter($this->tasks, function (Task $task) {
+            return !$task->isCompleted();
+        });
+    }
+
 }
