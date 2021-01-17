@@ -60,8 +60,9 @@ final class Task implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
-            'content' => $this->content
+            'id' => $this->getId(),
+            'content' => $this->getContent(),
+            'isCompleted' => $this->isCompleted()
         ];
     }
 }
