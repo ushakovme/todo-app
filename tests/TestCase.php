@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use DI\ContainerBuilder;
+use Dotenv\Dotenv;
 use Exception;
 use PHPUnit\Framework\TestCase as PHPUnit_TestCase;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,6 +27,9 @@ class TestCase extends PHPUnit_TestCase
         $containerBuilder = new ContainerBuilder();
 
         // Container intentionally not compiled for tests.
+
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv->load();
 
         // Set up settings
         $settings = require __DIR__ . '/../app/settings.php';
