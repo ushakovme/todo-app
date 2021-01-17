@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Task;
 
+use App\Domain\Task\Exception\TaskContentEmptyException;
 use App\Domain\Task\Exception\TaskContentLengthException;
 use JsonSerializable;
 
@@ -30,6 +31,9 @@ final class Task implements JsonSerializable
      */
     public function setContent(string $content)
     {
+        if (empty($content)) {
+            throw new TaskContentEmptyException();
+        }
         if (strlen($content) > static::MAX_TASK_LENGTH) {
             throw new TaskContentLengthException();
         }
