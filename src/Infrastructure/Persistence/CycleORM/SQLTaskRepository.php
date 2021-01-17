@@ -57,4 +57,10 @@ class SQLTaskRepository implements TaskRepositoryInterface
         );
         $transaction->run();
     }
+
+    public function findCompleted(): iterable
+    {
+        return $this->findAll(['completed' => true]);
+    }
+
 }

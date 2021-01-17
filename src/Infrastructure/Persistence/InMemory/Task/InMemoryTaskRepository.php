@@ -47,4 +47,12 @@ class InMemoryTaskRepository implements TaskRepositoryInterface
     {
         $this->tasks[] = $task;
     }
+
+    public function findCompleted(): iterable
+    {
+        return array_filter($this->tasks, function (Task $task) {
+            return $task->isCompleted();
+        });
+    }
+
 }

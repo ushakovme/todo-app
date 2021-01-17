@@ -17,5 +17,10 @@ interface TaskRepositoryInterface
      */
     public function findAll(): iterable;
 
+    /**
+     * @return Task[]
+     */
+    public function findCompleted(): iterable;
+
     public function save(Task $task);
 }
