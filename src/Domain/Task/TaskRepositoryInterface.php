@@ -28,4 +28,6 @@ interface TaskRepositoryInterface
     public function findNotCompleted(): iterable;
 
     public function save(Task $task);
+
+    public function delete(Task $task);
 }

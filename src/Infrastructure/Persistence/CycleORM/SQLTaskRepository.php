@@ -67,4 +67,15 @@ class SQLTaskRepository implements TaskRepositoryInterface
     {
         return $this->findAll(['completed' => false]);
     }
+
+    public function delete(Task $task)
+    {
+        $transaction = new Transaction($this->orm);
+        $transaction->delete(
+            $task,
+            Transaction::MODE_ENTITY_ONLY
+        );
+        $transaction->run();
+    }
+
 }

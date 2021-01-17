@@ -62,4 +62,11 @@ class InMemoryTaskRepository implements TaskRepositoryInterface
         });
     }
 
+    public function delete(Task $taskToRemove)
+    {
+        $this->tasks = array_filter($this->tasks, function (Task $task) use ($taskToRemove) {
+            return $task->getId()->toInt() !== $taskToRemove->getId()->toInt();
+        });
+    }
+
 }
