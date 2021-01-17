@@ -21,12 +21,13 @@ final class Task implements JsonSerializable
         $this->setContent($content);
     }
 
-    public function getId(): TaskId
+    public function getId(): ?TaskId
     {
         return $this->id;
     }
 
     /**
+     * @throws TaskContentEmptyException
      * @throws TaskContentLengthException
      */
     public function setContent(string $content)
@@ -59,7 +60,7 @@ final class Task implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id->toInt(),
+            'id' => $this->id,
             'content' => $this->content
         ];
     }

@@ -26,8 +26,8 @@ $settings = require __DIR__ . '/../app/settings.php';
 $settings($containerBuilder);
 
 // Set up schema
-$settings = require __DIR__ . '/../app/schema.php';
-$settings($containerBuilder);
+$schema = require __DIR__ . '/../app/schema.php';
+$schema($containerBuilder);
 
 // Set up dependencies
 $dependencies = require __DIR__ . '/../app/dependencies.php';

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\Domain\Task;
 
+use App\Domain\Task\Exception\TaskContentEmptyException;
+use App\Domain\Task\Exception\TaskContentLengthException;
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskId;
 use Tests\TestCase;
@@ -41,5 +43,17 @@ class TaskTest extends TestCase
         ]);
 
         $this->assertEquals($expectedPayload, json_encode($task));
+    }
+
+    public function testContentLengthException()
+    {
+        $this->expectException(TaskContentLengthException::class);
+        new Task(TaskId::fromInt(2), str_repeat(' ', 1002));
+    }
+
+    public function testContentEmptyException()
+    {
+        $this->expectException(TaskContentEmptyException::class);
+        new Task(TaskId::fromInt(2), '');
     }
 }

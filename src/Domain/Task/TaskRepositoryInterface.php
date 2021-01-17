@@ -15,5 +15,7 @@ interface TaskRepositoryInterface
     /**
      * @return Task[]
      */
-    public function findAll(): array;
+    public function findAll(): iterable;
+
+    public function save(Task $task);
 }

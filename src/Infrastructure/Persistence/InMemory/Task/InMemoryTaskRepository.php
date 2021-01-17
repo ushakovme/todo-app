@@ -42,4 +42,9 @@ class InMemoryTaskRepository implements TaskRepositoryInterface
     {
         return $this->tasks;
     }
+
+    public function save(Task $task)
+    {
+        $this->tasks[] = $task;
+    }
 }

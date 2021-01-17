@@ -14,6 +14,6 @@ class TaskIdTest extends TestCase
         $id = TaskId::fromInt($intId);
 
         $this->assertEquals($intId, $id->toInt());
-        $this->assertEquals((string)$intId, $id->toString());
+        $this->assertEquals((string)$intId, (string)$id);
     }
 }

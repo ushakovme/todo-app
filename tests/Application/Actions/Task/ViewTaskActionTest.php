@@ -34,7 +34,7 @@ class ViewTaskActionTest extends TestCase
 
         $container->set(TaskRepositoryInterface::class, $taskRepositoryProphecy->reveal());
 
-        $request = $this->createRequest('GET', '/tasks/' . $taskId->toString());
+        $request = $this->createRequest('GET', '/tasks/' . (string)$taskId);
         $response = $app->handle($request);
 
         $payload = (string)$response->getBody();
@@ -71,7 +71,7 @@ class ViewTaskActionTest extends TestCase
 
         $container->set(TaskRepositoryInterface::class, $taskRepositoryProphecy->reveal());
 
-        $request = $this->createRequest('GET', '/tasks/' . $taskId->toString());
+        $request = $this->createRequest('GET', '/tasks/' . (string)$taskId);
         $response = $app->handle($request);
 
         $payload = (string)$response->getBody();

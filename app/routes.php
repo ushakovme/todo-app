@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\Task\CreateTaskAction;
 use App\Application\Actions\Task\ListTasksAction;
 use App\Application\Actions\Task\ViewTaskAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -21,6 +22,7 @@ return function (App $app) {
 
     $app->group('/tasks', function (Group $group) {
         $group->get('', ListTasksAction::class);
+        $group->post('', CreateTaskAction::class);
         $group->get('/{id}', ViewTaskAction::class);
     });
 };
