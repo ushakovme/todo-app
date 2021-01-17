@@ -38,8 +38,9 @@ class TaskTest extends TestCase
         $task = new Task($id, $content);
 
         $expectedPayload = json_encode([
-            'id' => $id->toInt(),
+            'id' => $id,
             'content' => $content,
+            'isCompleted' => $task->isCompleted(),
         ]);
 
         $this->assertEquals($expectedPayload, json_encode($task));

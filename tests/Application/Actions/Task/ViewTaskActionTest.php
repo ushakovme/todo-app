@@ -44,7 +44,7 @@ class ViewTaskActionTest extends TestCase
         $this->assertEquals($serializedPayload, $payload);
     }
 
-    public function testActionThrowsUserNotFoundException()
+    public function testTaskNotFoundException()
     {
         $app = $this->getAppInstance();
 

@@ -15,6 +15,10 @@ final class Task implements JsonSerializable
 
     const MAX_TASK_LENGTH = 1000;
 
+    /**
+     * @throws TaskContentEmptyException
+     * @throws TaskContentLengthException
+     */
     public function __construct(?TaskId $id, string $content)
     {
         $this->id = $id;
