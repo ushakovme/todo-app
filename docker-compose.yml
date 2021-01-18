@@ -1,18 +1,44 @@
 version: '3.7'
 
-volumes:
-    logs:
-        driver: local
-
 services:
-    slim:
-        image: php:7.4-alpine
-        working_dir: /var/www
-        command: php -S 0.0.0.0:8080 -t public
+    nginx:
+        image: nginx:latest
+        restart: unless-stopped
         environment:
-            docker: "true"
+            TZ: Europe/Moscow
         ports:
-            - 8080:8080
+            - "8080:80"
         volumes:
             - .:/var/www
-            - logs:/var/www/logs
+            - ./docker/nginx:/etc/nginx/conf.d
+            - ./var/log/nginx:/var/log/nginx
+        links:
+            - php
+    php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        restart: unless-stopped
+        volumes:
+            - ./var/log/php:/var/log/php
+        environment:
+            TZ: Europe/Moscow
+            DB_USER: root
+            DB_PASSWORD:
+            DB_CONNECTION: mysql:host=db;dbname=todo
+            env: prod
+            docker: 'true'
+        links:
+            - db
+    db:
+        image: mysql:5.7
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./src/Infrastructure/Migrations:/docker-entrypoint-initdb.d
+        restart: unless-stopped
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_DATABASE: todo
+
+volumes:
+    db_data: {}
