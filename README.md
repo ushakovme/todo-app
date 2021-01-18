@@ -48,6 +48,9 @@ docker-compose up -d
 Ресурс будет доступен по адресу: `http://localhost:8080`.
 
 
+Примеры API: https://www.getpostman.com/collections/66a5e88d02ed83688955
+
+
 Запуск тестов
 ```bash
 composer test
