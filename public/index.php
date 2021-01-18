@@ -14,13 +14,13 @@ require __DIR__ . '/../vendor/autoload.php';
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
-if ($_ENV['env'] == 'prod') { // Should be set to true in production
-    $containerBuilder->enableCompilation(dirname(__DIR__) . '/var/cache');
-}
-
 if (file_exists(dirname(__DIR__) . '/.env')) {
     $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
     $dotenv->safeLoad();
+}
+
+if (($_ENV['env'] ?? 'dev') == 'prod') { // Should be set to true in production
+    $containerBuilder->enableCompilation(dirname(__DIR__) . '/var/cache');
 }
 
 // Set up settings
