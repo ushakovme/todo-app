@@ -13,11 +13,6 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
-    });
-
     $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('TODO app!');
         return $response;
@@ -29,9 +24,5 @@ return function (App $app) {
         $group->get('/{id}', ViewTaskAction::class);
         $group->delete('/{id}', DeleteTaskAction::class);
         $group->post('/{id}/complete', CompleteTaskAction::class);
-    });
-
-    $app->map(['GET', 'POST'], '/{routes:.*}', function (Request $request, Response $response) {
-        throw new HttpNotFoundException($request);
     });
 };
