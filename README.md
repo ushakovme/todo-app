@@ -34,24 +34,29 @@ cases/api-testing-automation/);
 
 ## Решение
 
-Запуск в dev режиме: 
-
-```bash
-composer start
-```
-
-Запуск через Docker:
+### Запуск через composer: 
 ```bash
 docker-compose up -d
 ```
 
-Ресурс будет доступен по адресу: `http://localhost:8080`.
+### Запуск в dev режиме: 
+Скопируйте файл с переменными окружения
+```bash
+cp .env.example .env
+```
+Заполните файл `.env` данными для доступа в базу
 
+Запустите локальный сервер
+```bash
+composer start
+```
+
+Ресурс будет доступен по адресу: http://localhost:8080.
 
 Примеры API: https://www.getpostman.com/collections/66a5e88d02ed83688955
 
 
-Запуск тестов
+### Запуск тестов
 ```bash
 composer test
 ```
