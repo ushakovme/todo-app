@@ -12,9 +12,8 @@ class CompleteTaskAction extends AbstractTaskAction
         $id = TaskId::fromInt((int)$this->resolveArg('id'));
 
         $task = $this->taskRepository->findById($id);
-        $task->complete();
 
-        $this->taskRepository->save($task);
+        $this->taskService->complete($task);
 
         return $this->respondWithData($task, 200);
     }

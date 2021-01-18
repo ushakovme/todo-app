@@ -29,7 +29,7 @@ class TestCase extends PHPUnit_TestCase
         // Container intentionally not compiled for tests.
 
         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
-        $dotenv->load();
+        $dotenv->safeLoad();
 
         // Set up settings
         $settings = require __DIR__ . '/../app/settings.php';

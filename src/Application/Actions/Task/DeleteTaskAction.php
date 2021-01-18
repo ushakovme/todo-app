@@ -12,7 +12,7 @@ class DeleteTaskAction extends AbstractTaskAction
         $id = TaskId::fromInt((int)$this->resolveArg('id'));
 
         $task = $this->taskRepository->findById($id);
-        $this->taskRepository->delete($task);
+        $this->taskService->delete($task);
 
         return $this->respondWithData(null);
     }
