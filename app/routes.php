@@ -9,7 +9,6 @@ use App\Application\Actions\Task\ViewTaskAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
-use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
