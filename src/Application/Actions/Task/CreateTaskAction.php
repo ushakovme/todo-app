@@ -11,8 +11,9 @@ class CreateTaskAction extends AbstractTaskAction
 {
     protected function action(): ResponseInterface
     {
-        $body = $this->request->getParsedBody();
-        $content = $body['content'] ?? '';
+        $body = $this->request->getBody()->getContents();
+        $parsed = json_decode($body, 1);
+        $content = $parsed['content'] ?? '';
 
         try {
             $task = $this->taskService->create($content);

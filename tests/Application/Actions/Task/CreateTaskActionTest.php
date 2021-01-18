@@ -11,6 +11,7 @@ use App\Domain\Task\Task;
 use App\Domain\Task\TaskRepositoryInterface;
 use DI\Container;
 use Slim\Middleware\ErrorMiddleware;
+use Slim\Psr7\Factory\StreamFactory;
 use Tests\TestCase;
 
 class CreateTaskActionTest extends TestCase
@@ -33,7 +34,10 @@ class CreateTaskActionTest extends TestCase
         $container->set(TaskRepositoryInterface::class, $taskRepositoryProphecy->reveal());
 
         $request = $this->createRequest('POST', '/tasks');
-        $request = $request->withParsedBody(['content' => $content]);
+        $factory = new StreamFactory();
+        $request = $request->withBody($factory->createStream(json_encode([
+            'content' => $content
+        ])));
 
         $response = $app->handle($request);
 
