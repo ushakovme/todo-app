@@ -9,6 +9,7 @@ use App\Application\Actions\Task\ViewTaskAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
+use Slim\Exception\HttpNotFoundException;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
@@ -28,5 +29,9 @@ return function (App $app) {
         $group->get('/{id}', ViewTaskAction::class);
         $group->delete('/{id}', DeleteTaskAction::class);
         $group->post('/{id}/complete', CompleteTaskAction::class);
+    });
+
+    $app->map(['GET', 'POST'], '/{routes:.*}', function (Request $request, Response $response) {
+        throw new HttpNotFoundException($request);
     });
 };
