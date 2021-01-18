@@ -24,7 +24,7 @@ services:
         environment:
             TZ: Europe/Moscow
             DB_USER: root
-            DB_PASSWORD:
+            DB_PASSWORD: ''
             DB_CONNECTION: mysql:host=db;dbname=todo
             env: prod
             docker: 'true'

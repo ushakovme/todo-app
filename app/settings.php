@@ -15,9 +15,9 @@ return function (ContainerBuilder $containerBuilder) {
                 'level' => Logger::DEBUG,
             ],
             'db' => [
-                'connection' => $_ENV['DB_CONNECTION'],
-                'username' => $_ENV['DB_USER'],
-                'password' => $_ENV['DB_PASSWORD'],
+                'connection' => ($_ENV['DB_CONNECTION'] ?? ''),
+                'username' => ($_ENV['DB_USER'] ?? ''),
+                'password' => ($_ENV['DB_PASSWORD'] ?? ''),
             ]
         ],
     ]);
